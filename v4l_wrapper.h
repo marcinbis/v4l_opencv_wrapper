@@ -26,11 +26,11 @@
 #include <errno.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
+#include <stdint.h>
 
-#include <linux/ipu.h>
+#include <ipu.h>
 #include <linux/videodev2.h>
-#include <linux/mxcfb.h>
-#include <linux/mxc_v4l2.h>
+#include "mxcfb.h"
 
 #define V4LWrapper_ERROR 		-1
 #define V4LWrapper_SUCCESS 		 0

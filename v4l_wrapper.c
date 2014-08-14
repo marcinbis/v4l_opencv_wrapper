@@ -270,7 +270,7 @@ int V4LWrapper_CreateCameraCapture (fsl_v4l_cap *capture, char *device, int widt
 {
 	struct v4l2_format fmt;
 	struct v4l2_requestbuffers req;
-	struct v4l2_dbg_chip_ident chip;
+//	struct v4l2_dbg_chip_ident chip;
 	struct v4l2_streamparm parm;
 	v4l2_std_id id;
 	
@@ -305,13 +305,13 @@ int V4LWrapper_CreateCameraCapture (fsl_v4l_cap *capture, char *device, int widt
 		return V4LWrapper_ERROR;
 	}
 	
-	if (ioctl(capture->fd_capture_v4l, VIDIOC_DBG_G_CHIP_IDENT, &chip))
+/*	if (ioctl(capture->fd_capture_v4l, VIDIOC_DBG_G_CHIP_IDENT, &chip))
 	{
 		printf("\nVIDIOC_DBG_G_CHIP_IDENT failed.\n");
 		close(capture->fd_capture_v4l);
 		return V4LWrapper_ERROR;
 	}
-	
+*/	
 	//printf("\nTV decoder chip is %s", chip.match.name);
 
 	if (ioctl(capture->fd_capture_v4l, VIDIOC_S_INPUT, &capture->g_input) < 0)

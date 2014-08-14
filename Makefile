@@ -1,20 +1,17 @@
-#before buildint it don't forget to export ROOTF_DIR and CROSS_COMPILER
-
-
 APPNAME 		= camera_test
-TOOLCHAIN		= /opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolchain/
-CROSS_COMPILER		= $(TOOLCHAIN)/bin/arm-fsl-linux-gnueabi-
+CROSS_COMPILE		= arm-poky-linux-gnueabi-
+ROOTFS_DIR		= $(shell arm-poky-linux-gnueabi-gcc --print-sysroot)
 
-CC			= $(CROSS_COMPILER)gcc
+CC			= $(CROSS_COMPILE)gcc
 DEL_FILE		= rm -rf
 CP_FILE			= cp -rf      
 
 TARGET_PATH_LIB 	= $(ROOTFS_DIR)/usr/lib
 TARGET_PATH_INCLUDE 	= $(ROOTFS_DIR)/usr/include
 
-CFLAGS			= -DLINUX -DUSE_SOC_MX6 -Wall -O2 -fsigned-char -march=armv7-a -mfpu=neon -mfloat-abi=softfp \
+CFLAGS			= -DLINUX -DUSE_SOC_MX6 -Wall -O2 -fsigned-char -march=armv7-a -mfpu=neon \
 			  -DEGL_API_FB -DGPU_TYPE_VIV -DGL_GLEXT_PROTOTYPES -DENABLE_GPU_RENDER_20 \
-			  -I../include -I$(ROOTFS_DIR)/usr/src/linux/include -I$(TARGET_PATH_INCLUDE) \
+			  -I$(TARGET_PATH_INCLUDE) \
 
 LFLAGS			= -Wl,--library-path=$(TARGET_PATH_LIB),-rpath-link=$(TARGET_PATH_LIB) -lm  -lpthread \
 			   -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml
